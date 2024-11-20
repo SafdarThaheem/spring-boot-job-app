@@ -1,9 +1,7 @@
 package GFM.jobApp.controllers;
 
 import GFM.jobApp.models.Job;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,5 +15,11 @@ public class JobController {
     @GetMapping("/jobs")
     public List<Job> getJobs() {
         return jobs;
+    }
+
+    @PostMapping("/create-job")
+    public String createJob(@RequestBody Job job) {
+        jobs.add(job);
+        return "Job Created";
     }
 }
