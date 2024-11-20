@@ -2,6 +2,10 @@ package GFM.jobApp.job.controllers;
 
 import GFM.jobApp.job.JobService;
 import GFM.jobApp.job.models.Job;
+import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -18,18 +22,21 @@ public class JobController {
     }
 
     @GetMapping("/jobs")
-    public List<Job> getJobs() {
-        return jobService.findJobs();
+    public ResponseEntity<List<Job>> getJobs() {
+        return ResponseEntity.ok(jobService.findJobs());
     }
 
     @PostMapping("/create-job")
-    public String createJob(@RequestBody Job job) {
+    public ResponseEntity<String> createJob(@RequestBody Job job) {
         jobService.createJob(job);
-        return "Job Created";
+        return new ResponseEntity<>( "Job Created", HttpStatus.OK);
     }
 
     @GetMapping("/job/{id}")
-    public Job getJobById(@PathVariable Long id) {
-        return jobService.getJobById(id);
+    public ResponseEntity<Job> getJobById(@PathVariable Long id) {
+        Job job = jobService.getJobById(id);
+        if (job != null)
+            return new ResponseEntity<>(job, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }
