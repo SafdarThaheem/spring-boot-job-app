@@ -8,4 +8,5 @@ public interface JobService {
 
     List<Job> findJobs();
     void createJob(Job job);
+    Job getJobById(Long id);
 }
