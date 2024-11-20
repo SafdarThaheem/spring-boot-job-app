@@ -1,4 +1,4 @@
-package GFM.jobApp.models;
+package GFM.jobApp.job.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
