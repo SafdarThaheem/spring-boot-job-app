@@ -1,5 +1,6 @@
 package GFM.jobApp.job;
 
+import GFM.jobApp.company.Company;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,4 +21,7 @@ public class Job {
     private String location;
     private String maxSalary;
     private String minSalary;
+
+    @ManyToOne
+    private Company company;
 }
