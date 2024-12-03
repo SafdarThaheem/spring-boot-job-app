@@ -1,12 +1,10 @@
 package GFM.jobApp.job.impl;
 
 import GFM.jobApp.job.JobService;
-import GFM.jobApp.job.models.Job;
-import GFM.jobApp.job.repo.JobRepository;
+import GFM.jobApp.job.Job;
+import GFM.jobApp.job.JobRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 

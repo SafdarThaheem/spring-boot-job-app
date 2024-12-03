@@ -1,7 +1,5 @@
 package GFM.jobApp.job;
 
-import GFM.jobApp.job.models.Job;
-
 import java.util.List;
 
 public interface JobService {

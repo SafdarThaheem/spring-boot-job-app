@@ -1,6 +1,5 @@
-package GFM.jobApp.job.repo;
+package GFM.jobApp.job;
 
-import GFM.jobApp.job.models.Job;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface JobRepository extends JpaRepository<Job, Long> {

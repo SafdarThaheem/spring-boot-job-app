@@ -1,4 +1,4 @@
-package GFM.jobApp.job.models;
+package GFM.jobApp.job;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
