@@ -10,4 +10,5 @@ public interface ReviewService {
     Optional<List<Review>> getReviews(Long companyId);
     Company addReview(long companyId, Review review) throws NoSuchObjectException;
     Review getReview(long companyId, long reviewId);
+    Review updateReview(long companyId, long reviewId, Review review);
 }

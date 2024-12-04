@@ -81,6 +81,26 @@ public class ReviewController {
         );
         return new ResponseEntity<>(successResponse, HttpStatus.OK);
     }
+
+    @PutMapping("/reviews/{reviewId}")
+    public ResponseEntity<ApiResponse> updateReview(@PathVariable long companyId, @PathVariable Long reviewId, @RequestBody Review review) {
+        Review Updated = reviewService.updateReview(companyId, reviewId, review);
+        if (Updated == null) {
+            ApiResponse failedResponse = new ApiResponse(
+                    HttpStatus.NOT_MODIFIED.name(),
+                    "Review Not Update",
+                    null
+            );
+            return new ResponseEntity<>(failedResponse, HttpStatus.NOT_MODIFIED);
+        }
+        ApiResponse successResponse = new ApiResponse(
+                HttpStatus.OK.name(),
+                "Review Updated!",
+                Updated
+        );
+        return new ResponseEntity<>(successResponse, HttpStatus.OK);
+    }
+
 }
 //2->validate the response
 
