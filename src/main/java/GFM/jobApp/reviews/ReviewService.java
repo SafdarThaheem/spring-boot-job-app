@@ -11,4 +11,5 @@ public interface ReviewService {
     Company addReview(long companyId, Review review) throws NoSuchObjectException;
     Review getReview(long companyId, long reviewId);
     Review updateReview(long companyId, long reviewId, Review review);
+    boolean deleteReview(long companyId, long reviewId);
 }

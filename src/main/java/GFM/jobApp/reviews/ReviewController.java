@@ -64,7 +64,8 @@ public class ReviewController {
     }
 
     @GetMapping("/reviews/{reviewId}")
-    public ResponseEntity<ApiResponse> getReview(@PathVariable Long companyId, @PathVariable Long reviewId) {
+    public ResponseEntity<ApiResponse> getReview(@PathVariable Long companyId,
+                                                 @PathVariable Long reviewId) {
         Review review = reviewService.getReview(companyId, reviewId);
         if (review == null) {
             ApiResponse failedResponse = new ApiResponse(
@@ -83,7 +84,9 @@ public class ReviewController {
     }
 
     @PutMapping("/reviews/{reviewId}")
-    public ResponseEntity<ApiResponse> updateReview(@PathVariable long companyId, @PathVariable Long reviewId, @RequestBody Review review) {
+    public ResponseEntity<ApiResponse> updateReview(@PathVariable long companyId,
+                                                    @PathVariable long reviewId,
+                                                    @RequestBody Review review) {
         Review Updated = reviewService.updateReview(companyId, reviewId, review);
         if (Updated == null) {
             ApiResponse failedResponse = new ApiResponse(
@@ -97,6 +100,26 @@ public class ReviewController {
                 HttpStatus.OK.name(),
                 "Review Updated!",
                 Updated
+        );
+        return new ResponseEntity<>(successResponse, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/reviews/{reviewId}")
+    public ResponseEntity<ApiResponse> deleteReview(@PathVariable long companyId, @PathVariable long reviewId) {
+        boolean deleted = reviewService.deleteReview(companyId, reviewId);
+
+        if(!deleted) {
+            ApiResponse failedResponse = new ApiResponse(
+                    HttpStatus.NOT_FOUND.name(),
+                    "Review Not Deleted",
+                    null
+            );
+            return new ResponseEntity<>(failedResponse, HttpStatus.NOT_FOUND);
+        }
+        ApiResponse successResponse = new ApiResponse(
+                HttpStatus.OK.name(),
+                "Review Deleted!",
+                deleted
         );
         return new ResponseEntity<>(successResponse, HttpStatus.OK);
     }
