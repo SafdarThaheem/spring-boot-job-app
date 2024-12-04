@@ -18,8 +18,8 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public List<Company> getAllCompanies() {
-        return companyRepository.findAll();
+    public Optional<List<Company>> getAllCompanies() {
+        return Optional.of(companyRepository.findAll());
     }
 
     @Override

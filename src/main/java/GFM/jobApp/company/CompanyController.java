@@ -1,11 +1,13 @@
 package GFM.jobApp.company;
 
 
+import GFM.jobApp.util.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/companies")
@@ -18,8 +20,22 @@ public class CompanyController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Company>> getCompanies() {
-        return new ResponseEntity<>(companyService.getAllCompanies(), HttpStatus.OK);
+    public ResponseEntity<ApiResponse> getCompanies() {
+        Optional<List<Company>> companyList = companyService.getAllCompanies();
+        if (companyList.get().isEmpty()) {
+            ApiResponse failApiResponse = new ApiResponse(
+                    HttpStatus.NOT_FOUND.name(),
+                    "Companies Not Found",
+                    companyList.get()
+            );
+            return new ResponseEntity<>(failApiResponse, HttpStatus.NOT_FOUND);
+        }
+        ApiResponse successApiResponse = new ApiResponse(
+                HttpStatus.OK.name(),
+                "Companies Found",
+                companyList.get()
+        );
+        return new ResponseEntity<>(successApiResponse, HttpStatus.OK);
     }
 
     @PostMapping("/create")
@@ -47,7 +63,7 @@ public class CompanyController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteCompany(@PathVariable long id) {
         boolean deleted = companyService.deleteCompany(id);
-        if(deleted) {
+        if (deleted) {
             return new ResponseEntity<>("Company Deleted Successfully", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Company Not Found", HttpStatus.NOT_FOUND);
