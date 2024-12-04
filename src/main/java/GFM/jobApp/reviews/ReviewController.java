@@ -62,6 +62,25 @@ public class ReviewController {
         );
         return new ResponseEntity<>(successResponse, HttpStatus.CREATED);
     }
+
+    @GetMapping("/reviews/{reviewId}")
+    public ResponseEntity<ApiResponse> getReview(@PathVariable Long companyId, @PathVariable Long reviewId) {
+        Review review = reviewService.getReview(companyId, reviewId);
+        if (review == null) {
+            ApiResponse failedResponse = new ApiResponse(
+                    HttpStatus.NOT_FOUND.name(),
+                    "Review Not Found",
+                    null
+            );
+            return new ResponseEntity<>(failedResponse, HttpStatus.NOT_FOUND);
+        }
+        ApiResponse successResponse = new ApiResponse(
+                HttpStatus.OK.name(),
+                "Review Found!",
+                review
+        );
+        return new ResponseEntity<>(successResponse, HttpStatus.OK);
+    }
 }
 //2->validate the response
 

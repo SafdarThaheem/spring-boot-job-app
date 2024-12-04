@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface ReviewService {
     Optional<List<Review>> getReviews(Long companyId);
     Company addReview(long companyId, Review review) throws NoSuchObjectException;
+    Review getReview(long companyId, long reviewId);
 }
