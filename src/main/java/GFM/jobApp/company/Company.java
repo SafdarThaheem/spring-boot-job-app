@@ -1,6 +1,7 @@
 package GFM.jobApp.company;
 
 import GFM.jobApp.job.Job;
+import GFM.jobApp.reviews.Review;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,4 +26,7 @@ public class Company {
     @JsonIgnore
     @OneToMany(mappedBy = "company")
     private List<Job> jobs;
+
+    @OneToMany(mappedBy = "company")
+    private List<Review> reviews;
 }
